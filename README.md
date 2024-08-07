@@ -1,79 +1,104 @@
-# Simple Image Encryption Tool
+# Pixel Swapping Encryption and Decryption Tool
 
-This repository contains a basic image encryption and decryption tool using pixel manipulation. The tool leverages simple mathematical operations to encrypt and decrypt images. This project is intended for educational purposes and basic obfuscation of images.
+This Python tool allows you to encrypt and decrypt images using pixel swapping techniques. You can choose to encrypt an image, decrypt it, or perform both operations in sequence.
+This can also be done using Caeser Cipher encyption [Caeser cipher git](https://github.com/Nomad4463/PRODIGY_CS_01)
 
 ## Features
 
-- **Simple Encryption:** Uses XOR operation on each pixel's RGB values with a user-defined key.
-- **Decryption:** Reverses the encryption using the same key to restore the original image.
-- **Supports Common Image Formats:** Works with various image formats like JPEG, PNG, etc.
+- **Encrypt Images:** Rearrange pixels in an image using a generated swap map.
+- **Decrypt Images:** Restore the original image by reversing the pixel swaps.
+- **Interactive User Input:** Choose to encrypt, decrypt, or both. Provide a seed to ensure reproducibility.
 
-## Getting Started
+## Requirements
 
-### Prerequisites
+- Python 3.x
+- Pillow library (Python Imaging Library)
 
-Ensure you have Python installed. You'll also need the Pillow library for image processing.
-
-Install the required dependencies:
+Install the Pillow library using pip:
 
 ```bash
 pip install pillow
 ```
 
-### Usage
+## Usage
 
-1. Clone the repository:
+### 1. Encrypt an Image
+
+To encrypt an image, run the script and follow the prompts:
 
 ```bash
-git clone https://github.com/yourusername/image-encryption-tool.git
-cd image-encryption-tool
+python image_swap_encryptor.py
 ```
 
-2. Encrypt an image:
+#### Prompts
 
-```python
-from image_encryptor import encrypt_image
+- **Choose an operation:** Enter `ENCRYPT` to encrypt the image.
+- **Enter the seed:** Provide a numeric seed (e.g., `42`). This seed will be used to generate the swap map.
+- **Optional:** After encryption, you will be asked if you want to decrypt the image. Enter `yes` to decrypt or `no` to skip.
 
-key = 42  # Define your encryption key
-encrypt_image("input_image.jpg", "encrypted_image.png", key)
+### 2. Decrypt an Image
+
+To decrypt an image, ensure you have the seed used for encryption:
+
+```bash
+python image_swap_encryptor.py
 ```
 
-3. Decrypt the image:
+#### Prompts
 
-```python
-from image_encryptor import decrypt_image
+- **Choose an operation:** Enter `DECRYPT` to decrypt an image.
+- **Enter the seed used for encryption:** Provide the seed that was used during encryption to generate the correct swap map.
 
-decrypt_image("encrypted_image.png", "decrypted_image.jpg", key)
+### 3. Perform Both Operations
+
+To automatically encrypt and then decrypt an image:
+
+```bash
+python image_swap_encryptor.py
 ```
 
-### Example
+#### Prompts
 
-```python
-from image_encryptor import encrypt_image, decrypt_image
+- **Choose an operation:** Enter `BOTH` to perform encryption followed by decryption.
+- **Enter the seed:** Provide a numeric seed (e.g., `42`). This seed will be used for both operations.
 
-key = 42  # Simple XOR key
+## Example
 
-# Encrypt the image
-encrypt_image("input_image.jpg", "encrypted_image.png", key)
-
-# Decrypt the image
-decrypt_image("encrypted_image.png", "decrypted_image.jpg", key)
-```
-
-### File Structure
+### Encrypt and Decrypt
 
 ```plaintext
-image-encryption-tool/
-│
-├── image_encryptor.py  # Contains the encryption and decryption functions
-├── README.md           # This readme file
-└── requirements.txt    # Python dependencies
+Choose an operation (ENCRYPT, DECRYPT, BOTH): ENCRYPT
+Enter the seed (an integer): 42
+Do you want to decrypt the image? (yes/no): yes
 ```
 
-### Security Considerations
+### Decrypt Only
 
-This encryption method is very basic and not secure for sensitive data. It's intended for educational purposes or simple obfuscation only. For more secure image encryption, consider using established cryptographic libraries.
+```plaintext
+Choose an operation (ENCRYPT, DECRYPT, BOTH): DECRYPT
+Enter the seed used for encryption: 42
+```
 
-### License
+### Both Operations
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```plaintext
+Choose an operation (ENCRYPT, DECRYPT, BOTH): BOTH
+Enter the seed (an integer): 42
+```
+
+## File Paths
+
+- **Input Image:** `input_image.jpg` (replace with your image file)
+- **Encrypted Image:** `encrypted_image.png`
+- **Decrypted Image:** `decrypted_image.jpg`
+
+## Notes
+
+- Ensure the input image exists in the same directory as the script, or update the file path accordingly.
+- The seed value must be the same for encryption and decryption to correctly restore the original image.
+- The swap map is generated randomly based on the seed, so using the same seed will yield consistent results.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
